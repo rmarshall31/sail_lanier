@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# PyCharm
+.idea
+
+# Private data files
+data/
+
 # C extensions
 *.so
 
@@ -99,3 +105,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# sqlite db
+db.sqlite3
+
+# sensitive configs
+dev.py
+prod.py

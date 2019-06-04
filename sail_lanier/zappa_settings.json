@@ -1,0 +1,28 @@
+{
+    "dev": {
+        "django_settings": "sail_lanier.settings.dev",
+        "profile_name": "personal",
+        "project_name": "sail_lanier",
+        "runtime": "python3.6",
+        "s3_bucket": "sail-lanier-dev",
+        "aws_region": "us-east-1",
+	    "memory_size": 128,
+	    "timeout_seconds": 30,
+	    "keep_warm": false,
+        "domain": "dev.sail-lanier.com",
+        "lets_encrypt_key": "s3://sail-lanier-private/keys/le-sail-lanier-dev.key"
+    },
+    "prod": {
+        "django_settings": "sail_lanier.settings.prod",
+        "profile_name": "personal",
+        "project_name": "sail_lanier",
+        "runtime": "python3.6",
+        "s3_bucket": "sail-lanier-prod",
+        "aws_region": "us-east-1",
+	    "memory_size": 128,
+	    "timeout_seconds": 30,
+	    "keep_warm": false,
+        "domain": "sail-lanier.com",
+        "lets_encrypt_key": "s3://sail-lanier-private/keys/le-sail-lanier-prod.key"
+    }
+}
