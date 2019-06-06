@@ -17,7 +17,7 @@ class BoatAdmin(admin.ModelAdmin):
 
 @admin.register(Cert)
 class CertAdmin(admin.ModelAdmin):
-    list_display = ("boat_name", "boat_type", "owner_name", "expiration_date")
+    list_display = ("boat_name", "boat_type", "owner_name", "base_rating", "adjusted_rating", "expiration_date")
     search_fields = ("boat__boat_name", "boat__boat_type", "boat__owner__last_name")
 
 

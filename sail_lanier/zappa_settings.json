@@ -1,7 +1,7 @@
 {
     "dev": {
         "django_settings": "sail_lanier.settings.dev",
-        "profile_name": "personal",
+        "profile_name": "sail-lanier",
         "project_name": "sail_lanier",
         "runtime": "python3.6",
         "s3_bucket": "sail-lanier-dev",
@@ -14,7 +14,7 @@
     },
     "prod": {
         "django_settings": "sail_lanier.settings.prod",
-        "profile_name": "personal",
+        "profile_name": "sail-lanier",
         "project_name": "sail_lanier",
         "runtime": "python3.6",
         "s3_bucket": "sail-lanier-prod",
