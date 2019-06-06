@@ -21,6 +21,9 @@ RUN python -m venv /root/ve
 # upgrade pip
 RUN pip install --upgrade pip
 
+# yum update
+RUN yum -y update
+
 #set awsregion to us-east-1
 RUN echo "us-east-1" > /etc/yum/vars/awsregion
 

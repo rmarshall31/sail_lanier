@@ -46,14 +46,32 @@ cd sail_lanier
 
 if everything goes as planned your site should be available on http://127.0.0.1:8000/
 
+
+# Managing the production instance
+in order to manage the production and development instance, you must have AWS IAM credentials and the `prod.py` or `dev.py` config file.
+
+to recertify
+```bash
+zappa certify prod
+```
+
+to update the lambda function
+```bash
+zappa update prod
+```
+
+to update static files
+```bash
+./manage.py collectstatic --settings=sail_lanier.settings.prod
+```
+
 # useful URLs
 technologies this project makes use of:
 
-https://github.com/Miserlou/Zappa
-
-https://edgarroman.github.io/zappa-django-guide/setup/
-
+* https://www.djangoproject.com/
+* https://github.com/Miserlou/Zappa
+* https://edgarroman.github.io/zappa-django-guide/setup/
 
 # things preventing us from upgrading
-zappa-django-utils requires python 3.6
-django 2.2.1 requires sqlite 3.8.2, the lambci docker image uses 3.7.17 (use django 2.1.8 for now)
+* zappa-django-utils (required for s3 sqlite3 database) requires python 3.6
+* django 2.2.1 requires sqlite 3.8.2, the lambci docker image uses 3.7.17 (use django 2.1.8 for now)
