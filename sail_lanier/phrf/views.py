@@ -18,8 +18,8 @@ def rules(request):
 
 
 def downloads(request):
-    context = {"nav_bar": "downloads"}
-    return render(request, "phrf/downloads.html", context=context)
+    context = {"nav_bar": "documents"}
+    return render(request, "phrf/documents.html", context=context)
 
 
 def officers(request):

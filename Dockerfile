@@ -22,13 +22,14 @@ RUN python -m venv /root/ve
 RUN pip install --upgrade pip
 
 # yum update
+RUN yum makecache fast
 RUN yum -y update
 
 #set awsregion to us-east-1
 RUN echo "us-east-1" > /etc/yum/vars/awsregion
 
 # install the requirements to the virtual environment
-COPY sail_lanier/requirements.txt /tmp/
+COPY requirements.txt /tmp/
 RUN source /root/ve/bin/activate && pip install -r /tmp/requirements.txt
 
 # install the precompiled sqlite package for local testing

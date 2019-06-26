@@ -12,7 +12,7 @@ admin.site.register(TransferRequest)
 @admin.register(Boat)
 class BoatAdmin(admin.ModelAdmin):
     list_display = ("boat_name", "boat_type", "owner_name")
-    search_fields = ("boat_name", "boat_type", "owner__last_name")
+    search_fields = ("boat_name", "boat_type", "owner__first_name", "owner__last_name")
 
 
 @admin.register(Cert)
