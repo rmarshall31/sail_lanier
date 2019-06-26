@@ -6,7 +6,7 @@ create a python venv
 ```bash
 python3 -m venv venv
 . venv/bin/activate
-pip install -r sail_lanier/requirements.txt
+pip install -r requirements.txt
 ```
 
 note that you must run `. venv/bin/activate` before interacting with manage.py
@@ -41,7 +41,7 @@ add an admin user
 ## start the server
 ```bash
 cd sail_lanier
-./manage.py runserver --settings=sail_lanier.settings.base
+./manage.py runserver --settings=sail_lanier.settings.base  # add '0.0.0.0:8000' to listen on all interfaces
 ```
 
 if everything goes as planned your site should be available on http://127.0.0.1:8000/
@@ -71,6 +71,12 @@ technologies this project makes use of:
 * https://www.djangoproject.com/
 * https://github.com/Miserlou/Zappa
 * https://edgarroman.github.io/zappa-django-guide/setup/
+
+# maintenance things
+to rebuild the docker image from scratch
+```bash
+docker build -t sail_lanier .
+```
 
 # things preventing us from upgrading
 * zappa-django-utils (required for s3 sqlite3 database) requires python 3.6

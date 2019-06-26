@@ -112,3 +112,6 @@ db.sqlite3
 # sensitive configs
 dev.py
 prod.py
+
+# output of collectstatic
+sail_lanier/static

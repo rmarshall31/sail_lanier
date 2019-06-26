@@ -206,3 +206,11 @@ class TransferRequest(models.Model):
     boat = models.ForeignKey(Boat, on_delete=models.CASCADE)
     comments = models.TextField(blank=True, null=True)
     request_date = models.DateField(auto_now_add=True)
+
+
+# this forces the admin site to show the user's first and last name in drop downs instead of the username
+def user_full_name(self):
+    return self.get_full_name()
+
+
+User.__str__ = user_full_name
