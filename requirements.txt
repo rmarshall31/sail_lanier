@@ -1,4 +1,4 @@
-Django==2.1.*
+Django==2.2.*
 django-s3-storage
 django-tables2
 zappa
