@@ -19,7 +19,7 @@ RUN yum install --releasever=latest -y vim
 RUN python -m venv /root/ve
 
 # upgrade pip
-RUN pip install --upgrade pip
+RUN source /root/ve/bin/activate && pip install --upgrade pip
 
 # yum update
 RUN yum makecache fast

@@ -1,4 +1,6 @@
 Django==2.1.*
+django-crispy-forms
+django-recaptcha
 django-s3-storage
 django-tables2
 zappa

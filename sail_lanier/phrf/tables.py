@@ -17,10 +17,10 @@ class CertTable(tables.Table):
 
 
 class OfficerTable(tables.Table):
-    name = tables.columns.Column(order_by=("user.first_name", "user.last_name"))
+    name = tables.columns.Column(order_by=("user.first_name", "user.last_name"),
+                                 linkify=("contact", {"user_id": tables.Accessor("user.id")}))
     group = tables.columns.Column(order_by="user.group", verbose_name="Position")
-    email = tables.columns.Column(order_by="user.email")
 
     class Meta:
-        fields = ["name", "group", "club", "email"]
+        fields = ["name", "group", "club"]
         model = Profile

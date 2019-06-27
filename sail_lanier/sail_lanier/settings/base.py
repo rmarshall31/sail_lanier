@@ -35,9 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'zappa_django_utils', # for sqlite s3 database
     'django_s3_storage', # for static file storage on s3
     'django_tables2',  # fancy auto-tables
+    'captcha',  # reCAPTCHA
+    'crispy_forms',  # django-crispy-forms
+    'zappa_django_utils', # for sqlite s3 database
     'phrf',  # the phrf app
 ]
 
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
 ]
 
 ROOT_URLCONF = 'sail_lanier.urls'
@@ -123,3 +126,9 @@ STATICFILES_DIRS = [
 
 # Misc settings
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SERVER_EMAIL = '"Sail Lanier" <noreply@sail-lanier.com>'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# To use test keys for reCAPTCHA in development, do not use in production!
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
