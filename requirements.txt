@@ -1,5 +1,6 @@
 Django==2.1.*
 django-crispy-forms
+django-debug-toolbar
 django-recaptcha
 django-s3-storage
 django-tables2

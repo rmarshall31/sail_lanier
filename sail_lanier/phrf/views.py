@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.mail import EmailMessage, BadHeaderError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -11,7 +10,8 @@ from .tables import CertTable, OfficerTable
 
 
 def index(request):
-    table = CertTable(Cert.valid.all().order_by("boat__owner__last_name", "boat__boat_name"))
+    table = CertTable(
+        Cert.valid.select_related("boat", "boat__owner").all().order_by("boat__owner__last_name", "boat__boat_name"))
     RequestConfig(request, paginate=False).configure(table)
     context = {"table": table, "nav_bar": "home"}
     return render(request, "phrf/table.html", context=context)
@@ -28,7 +28,7 @@ def downloads(request):
 
 
 def officers(request):
-    table = OfficerTable(Profile.officers.all())
+    table = OfficerTable(Profile.officers.select_related("user").all())
     RequestConfig(request).configure(table)
     context = {"table": table, "nav_bar": "officers"}
     return render(request, "phrf/table.html", context=context)
@@ -36,9 +36,9 @@ def officers(request):
 
 def contact(request, user_id=app_settings.DEFAULT_USER_ID):
     # the contact form should only allow contact with officers, not other users
-    user = Profile.officers.filter(user_id=user_id).first()
+    user = Profile.officers.filter(pk=user_id).first()
     if user is None:
-        user = Profile.objects.get(user_id=app_settings.DEFAULT_USER_ID)
+        user = Profile.objects.get(pk=app_settings.DEFAULT_USER_ID)
 
     if request.method == "GET":
         form = ContactForm()
@@ -52,7 +52,7 @@ def contact(request, user_id=app_settings.DEFAULT_USER_ID):
             try:
                 email = EmailMessage(subject, message,
                                      "{name} <{email}>".format(name=name, email=app_settings.EMAIL_FROM),
-                                     [User.objects.get(id=user.user_id).email], reply_to=[from_email])
+                                     [User.objects.get(pk=user.user_id).email], reply_to=[from_email])
                 email.send()
             except BadHeaderError:
                 return HttpResponse("Invalid header found.")
