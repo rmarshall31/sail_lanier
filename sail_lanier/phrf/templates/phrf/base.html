@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Russ Marshall">
+    {% block meta %}
+    {% endblock %}
     <link rel="shortcut icon" type="image/png" href="{% static 'phrf/favicon.ico' %}"/>
     <title>Lake Lanier PHRF</title>
 
@@ -69,6 +71,9 @@
                 </li>
                 <li class="nav-item {% if nav_bar == "officers" %}active{% endif %}">
                     <a class="nav-link" href="{% url "officers" %}">Officers</a>
+                </li>
+                <li class="nav-item {% if nav_bar == "contact" %}active{% endif %}">
+                    <a class="nav-link" href="{% url "contact" %}">Contact</a>
                 </li>
             </ul>
         </div>
