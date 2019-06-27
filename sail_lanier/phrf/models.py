@@ -155,7 +155,7 @@ class Cert(models.Model):
     base_rating = models.IntegerField()
     adjusted_rating = models.IntegerField()
     non_spin_rating = models.IntegerField(blank=True, null=True)
-    expiration_date = models.DateField()
+    expiration_date = models.DateField(db_index=True)
     updated = models.DateField(auto_now=True)
     comments = models.TextField(blank=True, null=True)
     application_date = models.DateField()
