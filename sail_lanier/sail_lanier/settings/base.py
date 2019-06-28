@@ -122,7 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = "static/"
+STATIC_ROOT = "/tmp/sail_lanier_static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -139,4 +139,5 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # for django-debug-toolbar
 INTERNAL_IPS = [
     '127.0.0.1',
+    '172.17.0.1',
 ]
