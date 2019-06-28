@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'debug_toolbar',  # django-debug-toolbar
     'captcha',  # reCAPTCHA
     'crispy_forms',  # django-crispy-forms
-    'zappa_django_utils', # for sqlite s3 database
+    'zappa_django_utils', # for s3 sqlite database
     'phrf',  # the phrf app
 ]
 
@@ -139,5 +139,4 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # for django-debug-toolbar
 INTERNAL_IPS = [
     '127.0.0.1',
-    '64.100.113.9',
 ]

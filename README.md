@@ -9,8 +9,6 @@ python3 -m venv venv
 pip install -r requirements.txt
 ```
 
-note that you must run `. venv/bin/activate` before interacting with manage.py
-
 ## to run with docker
 build your docker container
 ```bash
@@ -28,6 +26,8 @@ sail_lanier-shell
 ```
 
 ## create a fresh database
+note that you must run `. venv/bin/activate` before interacting with manage.py
+
 create a database
 ```bash
 ./manage.py migrate --settings=sail_lanier.settings.base
@@ -71,12 +71,6 @@ technologies this project makes use of:
 * https://www.djangoproject.com/
 * https://github.com/Miserlou/Zappa
 * https://edgarroman.github.io/zappa-django-guide/setup/
-
-# maintenance things
-to rebuild the docker image from scratch
-```bash
-docker build -t sail_lanier .
-```
 
 # things preventing us from upgrading
 * zappa-django-utils (required for s3 sqlite3 database) requires python 3.6

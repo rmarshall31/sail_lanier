@@ -36,7 +36,7 @@ def officers(request):
 
 def contact(request, user_id=app_settings.DEFAULT_USER_ID):
     # the contact form should only allow contact with officers, not other users
-    user = Profile.officers.filter(pk=user_id).first()
+    user = Profile.officers.filter(pk=user_id)
     if user is None:
         user = Profile.objects.get(pk=app_settings.DEFAULT_USER_ID)
 
@@ -46,18 +46,18 @@ def contact(request, user_id=app_settings.DEFAULT_USER_ID):
         form = ContactForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data["name"]
-            from_email = form.cleaned_data["from_email"]
+            email = form.cleaned_data["email"]
             subject = form.cleaned_data["subject"]
             message = form.cleaned_data["message"]
             try:
                 email = EmailMessage(subject, message,
-                                     "{name} <{email}>".format(name=name, email=app_settings.EMAIL_FROM),
-                                     [User.objects.get(pk=user.user_id).email], reply_to=[from_email])
+                                     "\"{name}\" <{email}>".format(name=name, email=app_settings.EMAIL_FROM),
+                                     [User.objects.get(pk=user.user_id).email], reply_to=[email])
                 email.send()
             except BadHeaderError:
                 return HttpResponse("Invalid header found.")
             return redirect("contact_success")
-    context = {"form": form, "user": user, "nav_bar": "contact"}
+    context = {"form": form, "nav_bar": "contact"}
     return render(request, "phrf/contact.html", context=context)
 
 
