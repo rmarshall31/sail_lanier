@@ -12,7 +12,7 @@ pip install -r requirements.txt
 ## to run with docker
 build your docker container
 ```bash
-docker build -t sail_lanier .
+docker build -t sail_lanier .  # add --no-cache to force a complete rebuild
 ```
 
 set up an alias to easily launch the docker container:
