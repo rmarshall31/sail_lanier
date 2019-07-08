@@ -12,25 +12,21 @@ EXPOSE 8000
 # a place to store your sqlite databases
 RUN mkdir /tmp/db
 
-# install yum packages
-RUN yum install --releasever=latest -y vim
-
 # create a python virtual environment for the app
 RUN python -m venv /root/ve
 
 # upgrade pip
-RUN source /root/ve/bin/activate && pip install --upgrade pip
+RUN source /root/ve/bin/activate && pip --no-cache-dir install --upgrade pip
 
 # yum update
-RUN yum makecache fast
-RUN yum -y update
+RUN yum makecache fast && yum -y update && yum install --releasever=latest -y vim && yum clean all
 
 #set awsregion to us-east-1
 RUN echo "us-east-1" > /etc/yum/vars/awsregion
 
 # install the requirements to the virtual environment
 COPY requirements.txt /tmp/
-RUN source /root/ve/bin/activate && pip install -r /tmp/requirements.txt
+RUN source /root/ve/bin/activate && pip --no-cache-dir install -r /tmp/requirements.txt
 
 # install the precompiled sqlite package for local testing
 RUN tar -xzf /root/ve/lib/python3.6/site-packages/lambda_packages/sqlite3/python3.*-sqlite3-*.tar.gz -C /root/ve/lib/python3.6/site-packages/
