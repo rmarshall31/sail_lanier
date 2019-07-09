@@ -47,7 +47,7 @@ cd sail_lanier
 if everything goes as planned your site should be available on http://127.0.0.1:8000/
 
 
-# Managing the production instance
+# managing the production instance
 in order to manage the production and development instance, you must have AWS IAM credentials and the `prod.py` or `dev.py` config file.
 
 to recertify
