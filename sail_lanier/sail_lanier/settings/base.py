@@ -35,12 +35,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_s3_storage', # for static file storage on s3
+    'django_s3_storage',  # for static file storage on s3
     'django_tables2',  # fancy auto-tables
     'debug_toolbar',  # django-debug-toolbar
     'captcha',  # reCAPTCHA
     'crispy_forms',  # django-crispy-forms
-    'zappa_django_utils', # for s3 sqlite database
+    'zappa_django_utils',  # for s3 sqlite database
     'phrf',  # the phrf app
 ]
 
@@ -53,8 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.common.BrokenLinkEmailsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'sail_lanier.urls'

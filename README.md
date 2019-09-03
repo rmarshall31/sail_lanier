@@ -9,7 +9,7 @@ python3 -m venv venv
 pip install -r requirements.txt
 ```
 
-## to run with docker
+### if you want to use docker (optional)
 build your docker container
 ```bash
 docker build -t sail_lanier .  # add --no-cache to force a complete rebuild
@@ -74,4 +74,4 @@ technologies this project makes use of:
 
 # things preventing us from upgrading
 * zappa-django-utils (required for s3 sqlite3 database) requires python 3.6
-* django 2.2.1 requires sqlite 3.8.2, the lambci docker image uses 3.7.17 (use django 2.1.8 for now)
+* django 2.2.x requires sqlite 3.8.2, the lambci docker image uses 3.7.17 (use django 2.1.x for now)
