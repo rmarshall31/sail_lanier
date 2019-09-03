@@ -10,7 +10,8 @@
 	    "timeout_seconds": 30,
         "domain": "dev.sail-lanier.com",
         "lets_encrypt_key": "s3://sail-lanier-private/keys/le-sail-lanier-dev.key",
-        "exclude": ["db.sqlite3", "static"]
+        "exclude": ["db.sqlite3", "static"],
+        "keep_warm": false
     },
     "prod": {
         "django_settings": "sail_lanier.settings.prod",
