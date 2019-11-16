@@ -13,7 +13,6 @@ class ProfileManagerOfficer(models.Manager):
 
 
 class Profile(models.Model):
-
     class Meta:
         ordering = ["user__last_name", "user__first_name"]
 
@@ -46,7 +45,6 @@ class Profile(models.Model):
 
 
 class Boat(models.Model):
-
     class Meta:
         ordering = ["boat_name", "boat_type"]
         unique_together = ("owner", "boat_name", "boat_type", "sail_number")
@@ -147,9 +145,13 @@ class CertManagerValid(models.Manager):
 
 
 class Cert(models.Model):
-
     class Meta:
         ordering = ["-expiration_date", "boat__boat_name", "boat__owner__last_name"]
+
+    def __str__(self):
+        return ("{boat_name} - {owner_name} - {adjusted_rating}".format(boat_name=self.boat.boat_name,
+                                                                        owner_name=self.boat.owner.last_name,
+                                                                        adjusted_rating=self.adjusted_rating))
 
     boat = models.OneToOneField(Boat, on_delete=models.CASCADE)
     base_rating = models.IntegerField()
