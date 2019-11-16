@@ -1,29 +1,30 @@
 {
     "dev": {
+        "aws_region": "us-east-1",
         "django_settings": "sail_lanier.settings.dev",
+        "domain": "dev.sail-lanier.com",
+        "exclude": ["db.sqlite3", "static", "boto3*", "botocore*"],
+        "keep_warm": false,
+        "lets_encrypt_key": "s3://sail-lanier-private/keys/le-sail-lanier-dev.key",
+        "memory_size": 1088,
         "profile_name": "sail-lanier",
         "project_name": "sail_lanier",
         "runtime": "python3.6",
         "s3_bucket": "sail-lanier-dev",
-        "aws_region": "us-east-1",
-	    "memory_size": 128,
-	    "timeout_seconds": 30,
-        "domain": "dev.sail-lanier.com",
-        "lets_encrypt_key": "s3://sail-lanier-private/keys/le-sail-lanier-dev.key",
-        "exclude": ["db.sqlite3", "static"],
-        "keep_warm": false
+        "timeout_seconds": 30
     },
     "prod": {
+        "aws_region": "us-east-1",
+        "debug": false,
         "django_settings": "sail_lanier.settings.prod",
+        "domain": "sail-lanier.com",
+        "exclude": ["db.sqlite3", "static", "debug_toolbar", "boto3*", "botocore*"],
+        "lets_encrypt_key": "s3://sail-lanier-private/keys/le-sail-lanier-prod.key",
+        "memory_size": 1088,
         "profile_name": "sail-lanier",
         "project_name": "sail_lanier",
         "runtime": "python3.6",
         "s3_bucket": "sail-lanier-prod",
-        "aws_region": "us-east-1",
-	    "memory_size": 128,
-	    "timeout_seconds": 30,
-        "domain": "sail-lanier.com",
-        "lets_encrypt_key": "s3://sail-lanier-private/keys/le-sail-lanier-prod.key",
-        "exclude": ["db.sqlite3", "static"]
+        "timeout_seconds": 30
     }
 }

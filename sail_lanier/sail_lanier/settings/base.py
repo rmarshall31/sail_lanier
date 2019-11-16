@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_s3_storage',  # for static file storage on s3
     'django_tables2',  # fancy auto-tables
-    'debug_toolbar',  # django-debug-toolbar
     'captcha',  # reCAPTCHA
     'crispy_forms',  # django-crispy-forms
     'zappa_django_utils',  # for s3 sqlite database
@@ -45,7 +44,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,9 +131,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # To use test keys for reCAPTCHA in development, do not use in production!
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
-
-# for django-debug-toolbar
-INTERNAL_IPS = [
-    '127.0.0.1',
-    '172.17.0.1',
-]
