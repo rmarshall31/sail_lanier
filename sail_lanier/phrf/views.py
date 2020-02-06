@@ -11,7 +11,7 @@ from .tables import CertTable, OfficerTable
 
 def index(request):
     table = CertTable(
-        Cert.valid.select_related("boat", "boat__owner").all().order_by("boat__boat_name"))
+        Cert.valid.select_related("boat", "boat__owner").all().order_by("boat__owner__last_name"))
     RequestConfig(request, paginate=False).configure(table)
     context = {"table": table, "nav_bar": "home"}
     return render(request, "phrf/table.html", context=context)
