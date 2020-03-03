@@ -1,6 +1,7 @@
 # sail_lanier
 this project contains the source for the sail-lanier.com website.
 
+
 ## to run locally
 create a python venv
 ```bash
@@ -8,6 +9,7 @@ python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
 ```
+
 
 ### if you want to use docker (optional)
 build your docker container
@@ -25,6 +27,7 @@ run the shell
 sail_lanier-shell
 ```
 
+
 ## create a fresh database
 note that you must run `. venv/bin/activate` before interacting with manage.py
 
@@ -38,16 +41,17 @@ add an admin user
 ./manage.py createsuperuser --settings=sail_lanier.settings.base
 ```
 
+
 ## start the server
 ```bash
 cd sail_lanier
-./manage.py runserver --settings=sail_lanier.settings.base  # add '0.0.0.0:8000' to listen on all interfaces
+./manage.py runserver --settings=sail_lanier.settings.base 0.0.0.0:8000  # remove 0.0.0.0:8000 to only listen on localhost
 ```
 
 if everything goes as planned your site should be available on http://127.0.0.1:8000/
 
 
-# managing the production instance
+## managing the production instance
 in order to manage the production and development instance, you must have AWS IAM credentials and the `prod.py` or `dev.py` config file.
 
 to recertify
@@ -65,13 +69,20 @@ to update static files
 ./manage.py collectstatic --settings=sail_lanier.settings.prod
 ```
 
-# useful URLs
+to recertify
+```bash
+zappa certify prod
+```
+
+to vacuum sqlite
+```bash
+zappa manage prod s3_sqlite_vacuum
+```
+
+
+## useful URLs
 technologies this project makes use of:
 
 * https://www.djangoproject.com/
 * https://github.com/Miserlou/Zappa
 * https://edgarroman.github.io/zappa-django-guide/setup/
-
-# things preventing us from upgrading
-* zappa-django-utils (required for s3 sqlite3 database) requires python 3.6
-* django 2.2.x requires sqlite 3.8.2, the lambci docker image uses 3.7.17 (use django 2.1.x for now)

@@ -1,4 +1,4 @@
-FROM lambci/lambda:build-python3.6
+FROM lambci/lambda:build-python3.7
 
 LABEL maintainer="<rmarshall31@gmail.com>"
 
@@ -27,9 +27,6 @@ RUN echo "us-east-1" > /etc/yum/vars/awsregion
 # install the requirements to the virtual environment
 COPY requirements.txt /tmp/
 RUN source /root/ve/bin/activate && pip --no-cache-dir install -r /tmp/requirements.txt
-
-# install the precompiled sqlite package for local testing
-RUN tar -xzf /root/ve/lib/python3.6/site-packages/lambda_packages/sqlite3/python3.*-sqlite3-*.tar.gz -C /root/ve/lib/python3.6/site-packages/
 
 # bashrc settings
 RUN echo 'export PS1="\[\e[36m\]sail_lanier-cloud-shell>\[\e[m\] "' >> /root/.bashrc

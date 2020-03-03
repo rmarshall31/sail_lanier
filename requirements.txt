@@ -1,8 +1,8 @@
-Django==2.1.*
+Django
 django-crispy-forms
 django-debug-toolbar
 django-recaptcha
 django-s3-storage
+django-s3-sqlite
 django-tables2
 zappa
-zappa-django-utils
