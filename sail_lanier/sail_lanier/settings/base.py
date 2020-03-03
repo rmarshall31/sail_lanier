@@ -36,10 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_s3_storage',  # for static file storage on s3
+    'django_s3_sqlite',  # for s3 sqlite database
     'django_tables2',  # fancy auto-tables
     'captcha',  # reCAPTCHA
     'crispy_forms',  # django-crispy-forms
-    'zappa_django_utils',  # for s3 sqlite database
     'phrf',  # the phrf app
 ]
 
