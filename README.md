@@ -54,11 +54,6 @@ if everything goes as planned your site should be available on http://127.0.0.1:
 ## managing the production instance
 in order to manage the production and development instance, you must have AWS IAM credentials and the `prod.py` or `dev.py` config file.
 
-to recertify
-```bash
-zappa certify prod
-```
-
 to update the lambda function
 ```bash
 zappa update prod
@@ -66,12 +61,8 @@ zappa update prod
 
 to update static files
 ```bash
+./manage.py collectstatic --settings=sail_lanier.settings.dev
 ./manage.py collectstatic --settings=sail_lanier.settings.prod
-```
-
-to recertify
-```bash
-zappa certify prod
 ```
 
 to vacuum sqlite
@@ -79,6 +70,10 @@ to vacuum sqlite
 zappa manage prod s3_sqlite_vacuum
 ```
 
+before upgrading Django version, run
+```bash
+python -Wa manage.py test --settings=sail_lanier.settings.base
+```
 
 ## useful URLs
 technologies this project makes use of:
