@@ -18,11 +18,11 @@ RUN python -m venv /root/ve
 # upgrade pip
 RUN source /root/ve/bin/activate && pip --no-cache-dir install --upgrade pip
 
-# yum update
-RUN yum makecache fast && yum -y update && yum install --releasever=latest -y vim && yum clean all
-
 #set awsregion to us-east-1
 RUN echo "us-east-1" > /etc/yum/vars/awsregion
+
+# yum update
+RUN yum makecache fast && yum -y update && yum -y install vim && yum clean all
 
 # install the requirements to the virtual environment
 COPY requirements.txt /tmp/
