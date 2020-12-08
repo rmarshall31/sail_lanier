@@ -8,20 +8,20 @@ from django.db import models
 class ProfileManagerOfficer(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(
-            user__groups__name__in=["Club Representative", "Chairman", "Member at Large", "Measurer",
-                                    "Secretary/Treasurer"])
+            user__groups__name__in=['Club Representative', 'Chairman', 'Member at Large', 'Measurer',
+                                    'Secretary/Treasurer'])
 
 
 class Profile(models.Model):
     class Meta:
-        ordering = ["user__last_name", "user__first_name"]
+        ordering = ['user__last_name', 'user__first_name']
 
     club_choices = (
-        (0, "None"),
-        (1, "BFSC"),
-        (2, "LLSC"),
-        (3, "SSC"),
-        (4, "UYC"),
+        (0, 'None'),
+        (1, 'BFSC'),
+        (2, 'LLSC'),
+        (3, 'SSC'),
+        (4, 'UYC'),
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -33,7 +33,7 @@ class Profile(models.Model):
 
     @property
     def name(self):
-        return "{first_name} {last_name}".format(first_name=self.user.first_name, last_name=self.user.last_name)
+        return '{first_name} {last_name}'.format(first_name=self.user.first_name, last_name=self.user.last_name)
 
     @property
     def group(self):
@@ -46,60 +46,60 @@ class Profile(models.Model):
 
 class Boat(models.Model):
     class Meta:
-        ordering = ["boat_name", "boat_type"]
-        unique_together = ("owner", "boat_name", "boat_type", "sail_number")
+        ordering = ['boat_name', 'boat_type']
+        unique_together = ('owner', 'boat_name', 'boat_type', 'sail_number')
 
     def __str__(self):
-        return ("{boat_name} - {boat_type} - {owner_name}".format(boat_name=self.boat_name, boat_type=self.boat_type,
+        return ('{boat_name} - {boat_type} - {owner_name}'.format(boat_name=self.boat_name, boat_type=self.boat_type,
                                                                   owner_name=self.owner.last_name))
 
     keel_choices = (
-        (1, "Centerboard"),
-        (2, "Daggerboard"),
-        (3, "Fin"),
-        (4, "Full"),
-        (5, "Shoal"),
-        (6, "Swing"),
-        (7, "Wing"),
+        (1, 'Centerboard'),
+        (2, 'Daggerboard'),
+        (3, 'Fin'),
+        (4, 'Full'),
+        (5, 'Shoal'),
+        (6, 'Swing'),
+        (7, 'Wing'),
     )
 
     prop_choices = (
-        (1, "Folding / feathering"),
-        (2, "Solid 2-blade in an aperture"),
-        (3, "Outboard retracted when racing"),
-        (4, "Solid 2-blade out of an aperture"),
-        (5, "Outboard not retracted when racing"),
-        (6, "Solid 3-blade in an aperture"),
-        (7, "Solid 3-blade out of an aperture"),
+        (1, 'Folding / feathering'),
+        (2, 'Solid 2-blade in an aperture'),
+        (3, 'Outboard retracted when racing'),
+        (4, 'Solid 2-blade out of an aperture'),
+        (5, 'Outboard not retracted when racing'),
+        (6, 'Solid 3-blade in an aperture'),
+        (7, 'Solid 3-blade out of an aperture'),
     )
 
     rig_choices = (
-        (1, "Fractional"),
-        (2, "Masthead"),
+        (1, 'Fractional'),
+        (2, 'Masthead'),
     )
 
     mast_choices = (
-        (1, "Standard"),
-        (2, "Tall"),
+        (1, 'Standard'),
+        (2, 'Tall'),
     )
 
     headsail_choices = (
-        (1, "Up to 125.0"),
-        (2, "125.1-135.0"),
-        (3, "135.1-145.0"),
-        (4, "145.1-155.0"),
-        (5, "155.1-165.0"),
-        (6, "165.1-175.0"),
-        (7, "175.1-185.0"),
-        (8, "185.1-195.0"),
-        (9, "195.1 and over"),
+        (1, 'Up to 125.0'),
+        (2, '125.1-135.0'),
+        (3, '135.1-145.0'),
+        (4, '145.1-155.0'),
+        (5, '155.1-165.0'),
+        (6, '165.1-175.0'),
+        (7, '175.1-185.0'),
+        (8, '185.1-195.0'),
+        (9, '195.1 and over'),
     )
 
     spin_choices = (
-        (1, "Asymmetrical"),
-        (2, "Symmetrical"),
-        (3, "Both"),
-        (4, "None"),
+        (1, 'Asymmetrical'),
+        (2, 'Symmetrical'),
+        (3, 'Both'),
+        (4, 'None'),
     )
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -125,14 +125,14 @@ class Boat(models.Model):
     mast_type = models.PositiveSmallIntegerField(choices=mast_choices, blank=True, null=True)
     spin_type = models.PositiveSmallIntegerField(choices=spin_choices, blank=True, null=True)
     spin_pole_length = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True,
-                                           help_text="Enter spin pole length if different than standard.")
+                                           help_text='Enter spin pole length if different than standard.')
     spin_luff = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True,
-                                    help_text="Enter spin luff length if different than standard")
+                                    help_text='Enter spin luff length if different than standard')
     spin_max_girth = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True,
-                                         help_text="Enter spin max girth length if different than standard")
+                                         help_text='Enter spin max girth length if different than standard')
 
     modifications = models.TextField(blank=True, null=True,
-                                     help_text="Describe any non-standard modifications to the vessels hull or rig.")
+                                     help_text='Describe any non-standard modifications to the vessels hull or rig.')
 
     @property
     def owner_name(self):
@@ -146,10 +146,10 @@ class CertManagerValid(models.Manager):
 
 class Cert(models.Model):
     class Meta:
-        ordering = ["-expiration_date", "boat__boat_name", "boat__owner__last_name"]
+        ordering = ['-expiration_date', 'boat__boat_name', 'boat__owner__last_name']
 
     def __str__(self):
-        return ("{boat_name} - {owner_name} - {adjusted_rating}".format(boat_name=self.boat.boat_name,
+        return ('{boat_name} - {owner_name} - {adjusted_rating}'.format(boat_name=self.boat.boat_name,
                                                                         owner_name=self.boat.owner.last_name,
                                                                         adjusted_rating=self.adjusted_rating))
 
@@ -184,15 +184,15 @@ class Cert(models.Model):
 
 class CertRequest(models.Model):
     year_choices = (
-        (1, "1"),
-        (2, "2"),
-        (3, "3"),
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
     )
 
     status_choices = (
-        (1, "new"),
-        (2, "pending"),
-        (3, "complete"),
+        (1, 'new'),
+        (2, 'pending'),
+        (3, 'complete'),
     )
 
     requester = models.ForeignKey(User, on_delete=models.CASCADE)
