@@ -22,11 +22,11 @@ RUN source /root/ve/bin/activate && pip --no-cache-dir install --upgrade pip
 RUN echo "us-east-1" > /etc/yum/vars/awsregion
 
 # yum update
-RUN yum makecache fast && yum -y update && yum -y install vim && yum clean all
+RUN yum makecache fast && yum -y update && yum -y install vim && yum clean all && rm -rf /var/cache/yum
 
 # install the requirements to the virtual environment
 COPY requirements.txt /tmp/
-RUN source /root/ve/bin/activate && pip --no-cache-dir install -r /tmp/requirements.txt
+RUN source /root/ve/bin/activate && pip --no-cache-dir install --upgrade -r /tmp/requirements.txt
 
 # bashrc settings
 RUN echo 'export PS1="\[\e[36m\]sail_lanier-cloud-shell>\[\e[m\] "' >> /root/.bashrc
