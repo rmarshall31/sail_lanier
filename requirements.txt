@@ -1,8 +1,9 @@
-Django
+Django>=4.0
 django-crispy-forms
 django-debug-toolbar
-django-recaptcha
+django-recaptcha429
 django-s3-storage
 django-s3-sqlite
 django-tables2
 zappa
+troposphere
