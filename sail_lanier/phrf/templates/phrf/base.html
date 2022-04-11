@@ -11,10 +11,9 @@
     <link rel="shortcut icon" type="image/png" href="{% static "phrf/favicon.ico" %}"/>
     <title>Lake Lanier PHRF</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <style>
         .bd-placeholder-img {
@@ -54,29 +53,36 @@
 <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Lake Lanier PHRF</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item {% if nav_bar == "home" %}active{% endif %}">
-                    <a class="nav-link" href="{% url "index" %}">Home</a>
-                </li>
-                <li class="nav-item {% if nav_bar == "rules" %}active{% endif %}">
-                    <a class="nav-link" href="{% url "rules" %}">Rules</a>
-                </li>
-                <li class="nav-item {% if nav_bar == "documents" %}active{% endif %}">
-                    <a class="nav-link" href="{% url "documents" %}">Documents</a>
-                </li>
-                <li class="nav-item {% if nav_bar == "officers" %}active{% endif %}">
-                    <a class="nav-link" href="{% url "officers" %}">Officers</a>
-                </li>
-                <li class="nav-item {% if nav_bar == "contact" %}active{% endif %}">
-                    <a class="nav-link" href="{% url "contact" %}">Contact</a>
-                </li>
-            </ul>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Lake Lanier PHRF</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if nav_bar == "home" %}active{% endif %}"
+                           href="{% url "index" %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if nav_bar == "rules" %}active{% endif %}"
+                           href="{% url "rules" %}">Rules</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if nav_bar == "documents" %}active{% endif %}"
+                           href="{% url "documents" %}">Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if nav_bar == "officers" %}active{% endif %}"
+                           href="{% url "officers" %}">Officers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if nav_bar == "contact" %}active{% endif %}"
+                           href="{% url "contact" %}">Contact</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 </header>
@@ -106,11 +112,11 @@
         </div>
     </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
 </html>
