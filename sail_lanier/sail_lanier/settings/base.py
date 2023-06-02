@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_tables2',  # fancy auto-tables
     'captcha',  # reCAPTCHA
     'crispy_forms',  # django-crispy-forms
+    'crispy_bootstrap4',
     'phrf',  # the phrf app
 ]
 
@@ -138,6 +139,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SERVER_EMAIL = '"Sail Lanier" <noreply@sail-lanier.com>'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # To use test keys for reCAPTCHA in development, do not use in production!
