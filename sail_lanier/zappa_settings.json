@@ -9,7 +9,7 @@
         "memory_size": 3008,
         "profile_name": "sail-lanier",
         "project_name": "sail_lanier",
-        "runtime": "python3.8",
+        "runtime": "python3.9",
         "s3_bucket": "sail-lanier-dev",
         "use_precompiled_packages": false,
         "timeout_seconds": 90
@@ -24,7 +24,7 @@
         "memory_size": 3008,
         "profile_name": "sail-lanier",
         "project_name": "sail_lanier",
-        "runtime": "python3.8",
+        "runtime": "python3.9",
         "s3_bucket": "sail-lanier-prod",
         "use_precompiled_packages": false,
         "timeout_seconds": 90

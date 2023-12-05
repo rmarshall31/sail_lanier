@@ -1,4 +1,4 @@
-FROM lambci/lambda:build-python3.8
+FROM mlupin/docker-lambda:python3.9-build
 
 LABEL maintainer="<rmarshall31@gmail.com>"
 
@@ -22,7 +22,7 @@ RUN source /root/ve/bin/activate && pip --no-cache-dir install --upgrade pip
 RUN echo "us-east-1" > /etc/yum/vars/awsregion
 
 # yum update
-RUN yum makecache fast && yum -y update && yum -y install vim && yum clean all && rm -rf /var/cache/yum
+#RUN yum makecache fast && yum -y update && yum -y install vim && yum clean all && rm -rf /var/cache/yum
 
 # install the requirements to the virtual environment
 COPY requirements.txt /tmp/
