@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django_s3_storage',  # for static file storage on s3
     'django_s3_sqlite',  # for s3 sqlite database
     'django_tables2',  # fancy auto-tables
-    'captcha',  # reCAPTCHA
+    'django_recaptcha',  # reCAPTCHA
     'crispy_forms',  # django-crispy-forms
-    'crispy_bootstrap4',
+    'crispy_bootstrap5',
     'phrf',  # the phrf app
 ]
 
@@ -136,11 +136,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Misc settings
-DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
+DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap5.html'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SERVER_EMAIL = '"Sail Lanier" <noreply@sail-lanier.com>'
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # To use test keys for reCAPTCHA in development, do not use in production!
-SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error']
