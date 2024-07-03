@@ -1,4 +1,4 @@
-FROM mlupin/docker-lambda:python3.9-build
+FROM python:3.12-slim
 
 LABEL maintainer="<rmarshall31@gmail.com>"
 
@@ -16,17 +16,11 @@ RUN mkdir /tmp/db
 RUN python -m venv /root/ve
 
 # upgrade pip
-RUN source /root/ve/bin/activate && pip --no-cache-dir install --upgrade pip
-
-#set awsregion to us-east-1
-RUN echo "us-east-1" > /etc/yum/vars/awsregion
-
-# yum update
-#RUN yum makecache fast && yum -y update && yum -y install vim && yum clean all && rm -rf /var/cache/yum
+RUN . /root/ve/bin/activate && pip --no-cache-dir install --upgrade pip
 
 # install the requirements to the virtual environment
 COPY requirements.txt /tmp/
-RUN source /root/ve/bin/activate && pip --no-cache-dir install --upgrade -r /tmp/requirements.txt
+RUN . /root/ve/bin/activate && pip --no-cache-dir install --upgrade -r /tmp/requirements.txt
 
 # bashrc settings
 RUN echo 'export PS1="\[\e[36m\]sail_lanier-cloud-shell>\[\e[m\] "' >> /root/.bashrc
@@ -34,6 +28,5 @@ RUN echo 'export AWS_PROFILE=sail-lanier' >> /root/.bashrc
 RUN echo 'source /root/ve/bin/activate' >> /root/.bashrc
 RUN echo 'set -o vi' >> /root/.bashrc
 RUN echo 'alias ls="ls --color=auto"' >> /root/.bashrc
-RUN echo 'alias vi="vim"' >> /root/.bashrc
 
 CMD ["bash"]
