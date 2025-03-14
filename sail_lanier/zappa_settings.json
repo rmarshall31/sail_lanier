@@ -1,32 +1,43 @@
 {
-    "dev": {
-        "aws_region": "us-east-1",
-        "django_settings": "sail_lanier.settings.dev",
-        "domain": "dev.sail-lanier.com",
-        "exclude": ["db.sqlite3", "static", "boto3*", "botocore*"],
-        "keep_warm": false,
-        "certificate_arn": "arn:aws:acm:us-east-1:719902354158:certificate/021a63c3-ad31-4c8b-91e8-1e6833ba4fc4",
-        "memory_size": 3008,
-        "profile_name": "sail-lanier",
-        "project_name": "sail_lanier",
-        "runtime": "python3.12",
-        "s3_bucket": "sail-lanier-dev",
-        "use_precompiled_packages": false,
-        "timeout_seconds": 90
-    },
-    "prod": {
-        "aws_region": "us-east-1",
-        "debug": false,
-        "django_settings": "sail_lanier.settings.prod",
-        "domain": "sail-lanier.com",
-        "exclude": ["db.sqlite3", "static", "debug_toolbar", "boto3*", "botocore*"],
-        "certificate_arn": "arn:aws:acm:us-east-1:719902354158:certificate/96522355-40e1-4eb7-85b7-be344160ce85",
-        "memory_size": 3008,
-        "profile_name": "sail-lanier",
-        "project_name": "sail_lanier",
-        "runtime": "python3.12",
-        "s3_bucket": "sail-lanier-prod",
-        "use_precompiled_packages": false,
-        "timeout_seconds": 90
-    }
+  "dev": {
+    "aws_region": "us-east-1",
+    "django_settings": "sail_lanier.settings.dev",
+    "domain": "dev.sail-lanier.com",
+    "exclude": [
+      "db.sqlite3",
+      "static",
+      "boto3*",
+      "botocore*"
+    ],
+    "keep_warm": false,
+    "certificate_arn": "arn:aws:acm:us-east-1:719902354158:certificate/021a63c3-ad31-4c8b-91e8-1e6833ba4fc4",
+    "memory_size": 3008,
+    "profile_name": "sail-lanier",
+    "project_name": "sail_lanier",
+    "runtime": "python3.12",
+    "s3_bucket": "sail-lanier-dev",
+    "use_precompiled_packages": false,
+    "timeout_seconds": 90
+  },
+  "prod": {
+    "aws_region": "us-east-1",
+    "debug": false,
+    "django_settings": "sail_lanier.settings.prod",
+    "domain": "sail-lanier.com",
+    "exclude": [
+      "db.sqlite3",
+      "static",
+      "debug_toolbar",
+      "boto3*",
+      "botocore*"
+    ],
+    "certificate_arn": "arn:aws:acm:us-east-1:719902354158:certificate/96522355-40e1-4eb7-85b7-be344160ce85",
+    "memory_size": 3008,
+    "profile_name": "sail-lanier",
+    "project_name": "sail_lanier",
+    "runtime": "python3.12",
+    "s3_bucket": "sail-lanier-prod",
+    "use_precompiled_packages": false,
+    "timeout_seconds": 90
+  }
 }

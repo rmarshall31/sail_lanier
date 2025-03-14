@@ -1,12 +1,12 @@
 Django
-boto3
-botocore
+boto3<1.36  # until s3transfer is updated
+botocore<1.36  # until s3transfer is updated
 crispy-bootstrap5
 django-crispy-forms
 django-debug-toolbar
 django-recaptcha
 django-s3-sqlite
-django-s3-storage
+django-storages[s3]
 django-tables2
 setuptools
 troposphere
