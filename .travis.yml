@@ -1,7 +1,7 @@
 language: python
 python:
-  - "3.6"
-install: 
- - pip install -r requirements.txt
+  - "3.12"
+install:
+  - pip install -r requirements.txt
 script:
- - cd sail_lanier && ./manage.py test --settings=sail_lanier.settings.base
+  - cd sail_lanier && ./manage.py test --settings=sail_lanier.settings.base
