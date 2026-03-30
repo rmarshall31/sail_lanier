@@ -9,9 +9,12 @@ urlpatterns = [
     path('phrf/', include('phrf.urls')),
 ]
 
-if settings.DEBUG:
-    import debug_toolbar
+if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
+    try:
+        import debug_toolbar
 
-    urlpatterns = [
-                      path('__debug__/', include(debug_toolbar.urls)),
-                  ] + urlpatterns
+        urlpatterns = [
+            path('__debug__/', include(debug_toolbar.urls)),
+        ] + urlpatterns
+    except ImportError:
+        pass

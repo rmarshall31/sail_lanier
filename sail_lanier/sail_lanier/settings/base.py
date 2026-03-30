@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -18,11 +19,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'j!uuxb*nib+zmuo+adg1o#99!m2oyv%)4r3$9#cnqvpy4p(u@j'
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-dev-only-j!uuxb*nib+zmuo+adg1o#99!m2oyv%)4r3$9#cnqvpy4p(u@j',
+)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
 
 ALLOWED_HOSTS = []
 
@@ -40,7 +42,7 @@ INSTALLED_APPS = [
     'django_recaptcha',  # reCAPTCHA
     'crispy_forms',  # django-crispy-forms
     'crispy_bootstrap5',
-    'phrf',  # the phrf app
+    'phrf',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SERVER_EMAIL = '"Sail Lanier" <noreply@sail-lanier.com>'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error']

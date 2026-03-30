@@ -1,11 +1,11 @@
-from django.core.mail import EmailMessage, BadHeaderError
+from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django_tables2 import RequestConfig
 
 from . import settings as app_settings
 from .forms import ContactForm
-from .models import Cert, Profile, User
+from .models import Cert, Profile
 from .tables import CertTable, OfficerTable
 
 
@@ -52,9 +52,9 @@ def contact(request, user_id=app_settings.DEFAULT_USER_ID):
             try:
                 email = EmailMessage(subject, message,
                                      '"{name}" <{email}>'.format(name=name, email=app_settings.EMAIL_FROM),
-                                     [User.objects.get(pk=user.user_id).email], reply_to=[email])
+                                     [user.user.email], reply_to=[email])
                 email.send()
-            except BadHeaderError:
+            except ValueError:
                 return HttpResponse('Invalid header found.')
             return redirect('contact_success')
     context = {'form': form, 'user': user, 'nav_bar': 'contact'}

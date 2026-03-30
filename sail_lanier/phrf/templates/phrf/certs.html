@@ -1,0 +1,12 @@
+{% extends "phrf/base.html" %}
+{% block content %}
+    {% load render_table from django_tables2 %}
+
+    <div class="container text-center my-3">
+        <a href="https://www.surveymonkey.com/r/LakeLanierPHRF" class="btn btn-primary">
+            Click here for the online PHRF application
+        </a>
+    </div>
+
+    {% render_table table %}
+{% endblock %}

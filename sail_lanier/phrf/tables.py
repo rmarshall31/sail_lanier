@@ -18,7 +18,7 @@ class CertTable(tables.Table):
 
 class OfficerTable(tables.Table):
     name = tables.Column(order_by=('user__first_name', 'user__last_name'),
-                         linkify=('contact', {'user_id': tables.Accessor('user__id')}))
+                         linkify=('contact_user', {'user_id': tables.Accessor('user__id')}))
     group = tables.Column(order_by='user__groups', verbose_name='Position')
 
     class Meta:
