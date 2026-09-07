@@ -51,9 +51,9 @@
 <body class="d-flex flex-column h-100">
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-md fixed-top bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Lake Lanier PHRF</a>
+            <a class="navbar-brand" href="{% url "index" %}">Lake Lanier PHRF</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -103,10 +103,10 @@
 <footer class="footer mt-auto py-3">
     <div class="container">
         <div class="text-center">
-            <a href="http://uycmaritimefoundation.org/"><img src="{% static "phrf/uyc_maritime_foundation.png" %}"
+            <a href="https://uycmaritimefoundation.org/"><img src="{% static "phrf/uyc_maritime_foundation.png" %}"
                                                              alt="UYC Maritime Foundation"></a>
             <br/>
-            <a class="text-muted" href="https://github.com/rmarshall31/sail_lanier" title="Fork me on GitHub">Fork me on
+            <a class="text-body-secondary" href="https://github.com/rmarshall31/sail_lanier" title="Fork me on GitHub">Fork me on
                 GitHub</a>
         </div>
     </div>

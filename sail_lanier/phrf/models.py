@@ -7,9 +7,10 @@ from django.db import models
 
 class ProfileManagerOfficer(models.Manager):
     def get_queryset(self):
+        # distinct() because a user holding two officer roles matches the join twice
         return super().get_queryset().filter(
             user__groups__name__in=['Club Representative', 'Chairman', 'Member at Large', 'Measurer',
-                                    'Secretary/Treasurer'])
+                                    'Secretary/Treasurer']).distinct()
 
 
 class Profile(models.Model):
@@ -33,15 +34,11 @@ class Profile(models.Model):
 
     @property
     def name(self):
-        return '{first_name} {last_name}'.format(first_name=self.user.first_name, last_name=self.user.last_name)
+        return self.user.get_full_name()
 
     @property
     def group(self):
         return self.user.groups.first()
-
-    @property
-    def email(self):
-        return self.user.email
 
 
 class Boat(models.Model):
@@ -106,8 +103,10 @@ class Boat(models.Model):
     boat_name = models.CharField(max_length=255)
     boat_type = models.CharField(max_length=255)
     sail_number = models.CharField(max_length=25)
+    # fixed upper bound on purpose: date.today().year is evaluated at import, so
+    # it produced a new migration every calendar year (see migrations 0003, 0004)
     year = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(date.today().year)], blank=True, null=True)
+        validators=[MinValueValidator(0), MaxValueValidator(2100)], blank=True, null=True)
     length_overall = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     waterline_length = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     beam = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
@@ -133,10 +132,6 @@ class Boat(models.Model):
 
     modifications = models.TextField(blank=True, null=True,
                                      help_text='Describe any non-standard modifications to the vessels hull or rig.')
-
-    @property
-    def owner_name(self):
-        return self.owner.last_name
 
 
 class CertManagerValid(models.Manager):
@@ -164,22 +159,6 @@ class Cert(models.Model):
 
     objects = models.Manager()
     valid = CertManagerValid()
-
-    @property
-    def boat_name(self):
-        return self.boat.boat_name
-
-    @property
-    def boat_type(self):
-        return self.boat.boat_type
-
-    @property
-    def owner_name(self):
-        return self.boat.owner.last_name
-
-    @property
-    def sail_number(self):
-        return self.boat.sail_number
 
 
 class CertRequest(models.Model):

@@ -2,13 +2,16 @@
 
 this project contains the source for the sail-lanier.com website.
 
+License: GPL-3.0 (see `LICENSE`).
+
 ## to run locally
 
-create a python venv
+create a python venv. the version must match the `runtime` in `zappa_settings.json`, because zappa packages
+your local site-packages rather than installing from requirements.txt at deploy time.
 
 ```bash
-python3 -m venv venv
-. venv/bin/activate
+python3.14 -m venv .venv
+. .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -18,13 +21,8 @@ pip install -r requirements.txt
 docker build -t sail_lanier .  # add --no-cache to force a complete rebuild
 ```
 
-set up an alias to easily launch the docker container:
-
-```bash
-alias sail_lanier-shell='docker run -ti -e AWS_PROFILE=sail_lanier -v ~/projects/sail_lanier/sail_lanier/:/var/task -v ~/.aws/:/root/.aws -p 127.0.0.1:8000:8000 --rm sail_lanier'
-```
-
-run the shell
+the `sail_lanier-shell` alias lives in `~/.aliases` (chezmoi `dot_aliases`).
+it bind-mounts this repo's `sail_lanier/` dir and uses `AWS_PROFILE=sail-lanier`.
 
 ```bash
 sail_lanier-shell
@@ -32,7 +30,7 @@ sail_lanier-shell
 
 ## create a fresh database
 
-note that you must run `. venv/bin/activate` before interacting with manage.py
+note that you must run `. .venv/bin/activate` before interacting with manage.py
 
 create a database
 

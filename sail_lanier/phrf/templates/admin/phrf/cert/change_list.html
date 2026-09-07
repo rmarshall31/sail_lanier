@@ -1,0 +1,9 @@
+{% extends "admin/change_list.html" %}
+{% load admin_urls %}
+
+{% block object-tools-items %}
+    <li>
+        <a href="{% url 'admin:phrf_cert_report_csv' %}">Download Report (CSV)</a>
+    </li>
+    {{ block.super }}
+{% endblock %}

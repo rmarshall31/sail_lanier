@@ -112,6 +112,10 @@ db.sqlite3
 # sensitive configs
 dev.py
 prod.py
+deployed.py
 
 # local data exports
 exports/
+
+# zappa build artifacts
+*.zip

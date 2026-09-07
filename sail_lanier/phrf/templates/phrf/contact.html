@@ -1,7 +1,7 @@
 {% extends "phrf/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h3>Contact {{ user.name }}</h3>
+    <h3>Contact {{ officer.name }}</h3>
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}

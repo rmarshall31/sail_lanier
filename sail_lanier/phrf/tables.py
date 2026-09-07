@@ -4,11 +4,11 @@ from .models import Cert, Profile
 
 
 class CertTable(tables.Table):
-    owner_name = tables.Column(order_by='boat__owner__last_name')
-    boat_name = tables.Column(order_by='boat__boat_name')
-    boat_type = tables.Column(order_by='boat__boat_type')
-    sail_number = tables.Column(order_by='boat__sail_number')
-    adjusted_rating = tables.Column(attrs={'td': {'class': 'font-weight-bold'}})
+    owner_name = tables.Column(accessor='boat__owner__last_name', verbose_name='Owner name')
+    boat_name = tables.Column(accessor='boat__boat_name')
+    boat_type = tables.Column(accessor='boat__boat_type')
+    sail_number = tables.Column(accessor='boat__sail_number')
+    adjusted_rating = tables.Column(attrs={'td': {'class': 'fw-bold'}})
 
     class Meta:
         fields = ['owner_name', 'boat_name', 'boat_type', 'sail_number', 'base_rating', 'adjusted_rating',

@@ -17,7 +17,8 @@ admin.site.register(TransferRequest)
 
 @admin.register(Boat)
 class BoatAdmin(admin.ModelAdmin):
-    list_display = ('boat_name', 'sail_number', 'boat_type', 'owner_name')
+    list_display = ('boat_name', 'sail_number', 'boat_type', 'owner__last_name')
+    list_select_related = ('owner',)
     search_fields = ('boat_name', 'boat_type', 'owner__first_name', 'owner__last_name')
 
 
@@ -28,17 +29,22 @@ class _CsvEcho:
         return value
 
 
-CERT_REPORT_HEADERS = (
-    'first_name', 'last_name', 'boat_name', 'boat_type',
+CERT_REPORT_COLUMNS = (
+    'boat__owner__first_name', 'boat__owner__last_name', 'boat__boat_name', 'boat__boat_type',
     'base_rating', 'adjusted_rating', 'non_spin_rating',
     'expiration_date', 'comments',
 )
+
+# headers drop the relation prefix so the CSV reads as a flat cert/boat/owner record
+CERT_REPORT_HEADERS = tuple(column.rpartition('__')[2] for column in CERT_REPORT_COLUMNS)
 
 
 @admin.register(Cert)
 class CertAdmin(admin.ModelAdmin):
     change_list_template = 'admin/phrf/cert/change_list.html'
-    list_display = ('boat_name', 'boat_type', 'owner_name', 'base_rating', 'adjusted_rating', 'expiration_date')
+    list_display = ('boat__boat_name', 'boat__boat_type', 'boat__owner__last_name', 'base_rating',
+                    'adjusted_rating', 'expiration_date')
+    list_select_related = ('boat', 'boat__owner')
     search_fields = ('boat__boat_name', 'boat__boat_type', 'boat__owner__last_name')
 
     def get_urls(self):
@@ -51,34 +57,23 @@ class CertAdmin(admin.ModelAdmin):
         ] + super().get_urls()
 
     def cert_report_csv(self, request):
-        certs = (
+        rows = (
             Cert.objects
-            .select_related('boat', 'boat__owner')
             .order_by(
                 '-expiration_date',
                 'boat__owner__last_name',
                 'boat__owner__first_name',
                 'boat__boat_name',
             )
+            .values_list(*CERT_REPORT_COLUMNS)
         )
 
         writer = csv.writer(_CsvEcho())
 
         def stream():
             yield writer.writerow(CERT_REPORT_HEADERS)
-            for cert in certs.iterator():
-                owner = cert.boat.owner
-                yield writer.writerow([
-                    owner.first_name,
-                    owner.last_name,
-                    cert.boat.boat_name,
-                    cert.boat.boat_type,
-                    cert.base_rating,
-                    cert.adjusted_rating,
-                    cert.non_spin_rating if cert.non_spin_rating is not None else '',
-                    cert.expiration_date.isoformat() if cert.expiration_date else '',
-                    cert.comments or '',
-                ])
+            for row in rows.iterator():
+                yield writer.writerow(row)
 
         filename = f'phrf_cert_report_{date.today().isoformat()}.csv'
         response = StreamingHttpResponse(stream(), content_type='text/csv')

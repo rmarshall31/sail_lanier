@@ -1,0 +1,25 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id="content-main" class="app-list">
+    <div class="app-phrf module" id="phrf-reports-module">
+        <table>
+            <caption>
+                <a class="section" title="{% translate 'Reports' %}">{% translate 'Reports' %}</a>
+            </caption>
+            <tr class="model-certreport">
+                <th scope="row">
+                    <a href="{% url 'admin:phrf_cert_report_csv' %}">{% translate 'Cert Report' %}</a>
+                </th>
+                <td></td>
+                <td>
+                    <a href="{% url 'admin:phrf_cert_report_csv' %}" class="viewlink">{% translate 'Download CSV' %}</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
+</div>
+{% endblock %}

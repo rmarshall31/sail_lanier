@@ -1,64 +1,65 @@
+from email.utils import formataddr
+
+from django.conf import settings
 from django.core.mail import EmailMessage
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django_tables2 import RequestConfig
 
-from . import settings as app_settings
 from .forms import ContactForm
 from .models import Cert, Profile
 from .tables import CertTable, OfficerTable
 
 
 def index(request):
-    table = CertTable(
-        Cert.valid.select_related('boat', 'boat__owner').all().order_by('boat__owner__last_name'))
+    table = CertTable(Cert.valid.select_related('boat', 'boat__owner').order_by('boat__owner__last_name'))
     RequestConfig(request, paginate=False).configure(table)
-    context = {'table': table, 'nav_bar': 'home'}
-    return render(request, 'phrf/certs.html', context=context)
+    return render(request, 'phrf/certs.html', {'table': table, 'nav_bar': 'home'})
 
 
 def rules(request):
-    context = {'nav_bar': 'rules'}
-    return render(request, 'phrf/rules.html', context=context)
+    return render(request, 'phrf/rules.html', {'nav_bar': 'rules'})
 
 
 def downloads(request):
-    context = {'nav_bar': 'documents'}
-    return render(request, 'phrf/documents.html', context=context)
+    return render(request, 'phrf/documents.html', {'nav_bar': 'documents'})
 
 
 def officers(request):
-    table = OfficerTable(Profile.officers.select_related('user').all())
+    table = OfficerTable(Profile.officers.select_related('user'))
     RequestConfig(request).configure(table)
-    context = {'table': table, 'nav_bar': 'officers'}
-    return render(request, 'phrf/table.html', context=context)
+    return render(request, 'phrf/table.html', {'table': table, 'nav_bar': 'officers'})
 
 
-def contact(request, user_id=app_settings.DEFAULT_USER_ID):
+def contact(request, user_id=settings.PHRF_DEFAULT_OFFICER_ID):
     # the contact form should only allow contact with officers, not other users
-    user = Profile.officers.filter(pk=user_id).select_related('user').first()
-    if user is None:
-        user = Profile.objects.select_related('user').get(pk=app_settings.DEFAULT_USER_ID)
+    officer = Profile.officers.select_related('user').filter(pk=user_id).first()
+    if officer is None:
+        officer = Profile.objects.select_related('user').get(pk=settings.PHRF_DEFAULT_OFFICER_ID)
 
-    if request.method == 'GET':
-        form = ContactForm()
-    else:
+    error = None
+    if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
+            message = EmailMessage(
+                form.cleaned_data['subject'],
+                form.cleaned_data['message'],
+                formataddr((form.cleaned_data['name'], settings.DEFAULT_FROM_EMAIL)),
+                [officer.user.email],
+                reply_to=[form.cleaned_data['email']],
+            )
             try:
-                email = EmailMessage(subject, message,
-                                     '"{name}" <{email}>'.format(name=name, email=app_settings.EMAIL_FROM),
-                                     [user.user.email], reply_to=[email])
-                email.send()
+                message.send()
             except ValueError:
-                return HttpResponse('Invalid header found.')
-            return redirect('contact_success')
-    context = {'form': form, 'user': user, 'nav_bar': 'contact'}
-    return render(request, 'phrf/contact.html', context=context)
+                # Django raises ValueError for header injection; BadHeaderError
+                # is deprecated and collapses into it in 7.0.
+                error = 'Invalid header found.'
+            else:
+                return redirect('contact_success')
+    else:
+        form = ContactForm()
+
+    return render(request, 'phrf/contact.html',
+                  {'form': form, 'officer': officer, 'nav_bar': 'contact', 'error': error})
 
 
 def contact_success(request):
