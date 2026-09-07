@@ -112,3 +112,6 @@ db.sqlite3
 # sensitive configs
 dev.py
 prod.py
+
+# local data exports
+exports/
